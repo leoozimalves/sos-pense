@@ -10,6 +10,9 @@
             --bg-color: #f4f7f6;
             --text-color: #333;
             --box-bg: #ffffff;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --whatsapp-color: #25D366;
         }
 
         body {
@@ -85,7 +88,7 @@
         .radio-group {
             display: flex;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .radio-group label {
@@ -107,10 +110,36 @@
             width: 100%;
             font-weight: bold;
             transition: background 0.3s;
+            margin-bottom: 10px;
         }
 
-        .btn:hover {
-            background-color: #004494;
+        .btn:hover { background-color: #004494; }
+        
+        .btn-success { background-color: var(--success-color); }
+        .btn-success:hover { background-color: #218838; }
+        
+        .btn-danger { background-color: var(--danger-color); }
+        .btn-danger:hover { background-color: #c82333; }
+
+        .btn-whatsapp { 
+            background-color: var(--whatsapp-color); 
+            color: #fff;
+            font-size: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-whatsapp:hover { background-color: #1ebe57; }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .action-buttons .btn {
+            margin-bottom: 0;
         }
 
         .instruction-box {
@@ -119,14 +148,7 @@
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 0 5px 5px 0;
-        }
-
-        .checkbox-group {
-            margin: 20px 0;
-            background-color: #f9f9f9;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
+            line-height: 1.5;
         }
 
         .tutorial-steps {
@@ -135,12 +157,20 @@
             border-radius: 5px;
             border: 1px solid #ffe082;
             margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.5;
         }
         
         .tutorial-steps ul {
-            margin: 0;
+            margin: 10px 0;
             padding-left: 20px;
         }
+
+        .success-screen {
+            text-align: center;
+            padding: 20px;
+        }
+        .success-screen h3 { color: var(--success-color); font-size: 24px;}
     </style>
 </head>
 <body>
@@ -148,10 +178,17 @@
 <div class="container">
     <h2>Suporte Técnico - Pense Revalida</h2>
 
+    <!-- TELA DE SUCESSO (Oculta por padrão) -->
+    <div id="success-screen" class="step success-screen">
+        <h3>✅ Problema Resolvido!</h3>
+        <p>Que excelente notícia! Agradecemos por realizar os testes.</p>
+        <p>Você já pode voltar aos seus estudos na plataforma. Bons estudos e foco no Revalida!</p>
+    </div>
+
     <!-- ETAPA 1: Identificação -->
     <div id="step1" class="step active">
         <h3>Etapa 1: Identificação</h3>
-        <p>Para começarmos, por favor informe seus dados de acesso à plataforma.</p>
+        <p>Para agilizarmos seu atendimento, informe seus dados de acesso.</p>
         
         <div class="form-group">
             <label for="nome">Nome Completo:</label>
@@ -171,96 +208,145 @@
         <h3>Etapa 2: Detalhes do Problema</h3>
         
         <div class="form-group">
-            <label for="problema">Descreva aqui qual problema você está enfrentando na plataforma:</label>
-            <textarea id="problema" placeholder="Detalhe o erro, o que aparece na tela, etc." required></textarea>
+            <label for="problema">Descreva qual problema você está enfrentando:</label>
+            <textarea id="problema" placeholder="Detalhe o erro, mensagem na tela, etc." required></textarea>
         </div>
         
         <div class="form-group">
-            <label>Qual dispositivo você está utilizando no momento?</label>
+            <label>Qual dispositivo você está utilizando agora?</label>
             <div class="radio-group">
                 <label><input type="radio" name="dispositivo" value="Computador" checked> 💻 Computador</label>
                 <label><input type="radio" name="dispositivo" value="Celular"> 📱 Celular</label>
                 <label><input type="radio" name="dispositivo" value="Tablet"> 💊 Tablet</label>
             </div>
         </div>
+
+        <div class="form-group">
+            <label>Qual tipo de conexão de internet?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="rede" value="Wi-Fi" checked> 📶 Wi-Fi</label>
+                <label><input type="radio" name="rede" value="4G/5G"> 📡 4G/5G</label>
+            </div>
+        </div>
         
-        <button class="btn" onclick="nextStep(2)">Salvar e Ir para Soluções</button>
+        <button class="btn" onclick="nextStep(2)">Salvar e Iniciar Testes</button>
     </div>
 
     <!-- ETAPA 3: Orientação Inicial (Chrome) -->
     <div id="step3" class="step">
-        <h3>Etapa 3: Primeira Tentativa de Solução</h3>
+        <h3>Passo 1: Navegador Recomendado</h3>
         
         <div class="instruction-box">
-            <strong>Instrução:</strong> A plataforma Pense Revalida é otimizada para funcionar melhor no navegador <strong>Google Chrome</strong>.
+            A plataforma Pense Revalida funciona muito melhor no navegador <strong>Google Chrome</strong>.
             <br><br>
-            Se você estiver usando outro navegador (como Safari, Edge ou Firefox), pedimos que baixe o Google Chrome e tente realizar o login através dele.
-        </div>
-
-        <div class="checkbox-group">
-            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
-                <input type="checkbox" id="usa-chrome" style="width: 20px; height: 20px;">
-                <strong>Já estou testando no Google Chrome e o problema persiste.</strong>
-            </label>
+            Se você estiver usando outro navegador (Safari, Edge, Firefox), pedimos que feche, abra o Google Chrome e tente realizar o login lá.
         </div>
         
-        <button class="btn" id="btn-step3" onclick="nextStep(3)" style="display: none;">Ir para próxima etapa</button>
+        <p style="text-align: center; font-weight: bold;">Essa etapa solucionou o problema?</p>
+        <div class="action-buttons">
+            <button class="btn btn-success" onclick="mostrarSucesso()">✅ Sim, resolveu!</button>
+            <button class="btn btn-danger" onclick="nextStep(3)">❌ Não, o erro continua</button>
+        </div>
     </div>
 
     <!-- ETAPA 4: Guia Anônima -->
     <div id="step4" class="step">
-        <h3>Etapa 4: Teste em Guia Anônima</h3>
-        <p>Como você já está no Google Chrome, precisamos isolar o problema. Muitas vezes, dados salvos no navegador (cache) bloqueiam o acesso correto.</p>
+        <h3>Passo 2: Teste em Guia Anônima</h3>
         
         <div class="instruction-box">
-            Por favor, abra uma <strong>Guia Anônima</strong> no Google Chrome e tente acessar a plataforma novamente.
+            Muitas vezes, dados antigos salvos no navegador (cache) bloqueiam o acesso. Por favor, abra uma <strong>Guia Anônima no Google Chrome</strong> e tente acessar a plataforma novamente.
         </div>
 
         <div class="tutorial-steps">
-            <strong>Como abrir uma Guia Anônima:</strong>
-            <br><br>
-            <strong>No Computador:</strong>
+            <strong>Como abrir no Computador:</strong>
             <ul>
-                <li>Abra o Google Chrome.</li>
-                <li>No canto superior direito, clique nos três pontinhos (Mais).</li>
-                <li>Selecione <strong>Nova janela anônima</strong>.</li>
-                <li><em>Atalho:</em> Pressione as teclas <strong>Ctrl + Shift + N</strong> (Windows) ou <strong>Cmd + Shift + N</strong> (Mac).</li>
+                <li>Abra o Chrome e aperte <strong>Ctrl + Shift + N</strong> (Windows) ou <strong>Cmd + Shift + N</strong> (Mac).</li>
             </ul>
-            <br>
-            <strong>No Celular ou Tablet:</strong>
+            <strong>Como abrir no Celular/Tablet:</strong>
             <ul>
-                <li>Abra o aplicativo do Google Chrome.</li>
-                <li>Toque nos três pontinhos (Mais) no canto superior (ou inferior) direito.</li>
-                <li>Toque em <strong>Nova guia anônima</strong>.</li>
+                <li>Abra o Chrome, toque nos três pontinhos e selecione <strong>Nova guia anônima</strong>.</li>
             </ul>
         </div>
         
-        <button class="btn" onclick="finalizar()">Concluir e Enviar Relatório</button>
+        <p style="text-align: center; font-weight: bold;">Essa etapa solucionou o problema?</p>
+        <div class="action-buttons">
+            <button class="btn btn-success" onclick="mostrarSucesso()">✅ Sim, resolveu!</button>
+            <button class="btn btn-danger" onclick="nextStep(4)">❌ Não, o erro continua</button>
+        </div>
+    </div>
+
+    <!-- ETAPA 5: Data e Hora -->
+    <div id="step5" class="step">
+        <h3>Passo 3: Sincronizar Data e Hora</h3>
+        
+        <div class="instruction-box">
+            Se a data e a hora do seu dispositivo estiverem erradas ou fora do modo automático, o sistema de segurança da plataforma recusa a conexão, gerando conflito.
+        </div>
+
+        <div class="tutorial-steps">
+            <strong>Como colocar em Modo Automático:</strong>
+            <ul>
+                <li><strong>Windows:</strong> Clique com o botão direito no relógio > Ajustar data/hora > Ative a opção "Definir horário automaticamente".</li>
+                <li><strong>Mac:</strong> Menu Apple > Ajustes do Sistema > Geral > Data e Hora > Ative "Definir data e hora automaticamente".</li>
+                <li><strong>Celular/Tablet:</strong> Vá em Configurações > Geral (ou Sistema) > Data e Hora > Ative a opção "Data e hora automáticas".</li>
+            </ul>
+        </div>
+        
+        <p style="text-align: center; font-weight: bold;">Essa etapa solucionou o problema?</p>
+        <div class="action-buttons">
+            <button class="btn btn-success" onclick="mostrarSucesso()">✅ Sim, resolveu!</button>
+            <button class="btn btn-danger" onclick="nextStep(5)">❌ Não, o erro continua</button>
+        </div>
+    </div>
+
+    <!-- ETAPA 6: Troca de Dispositivo / Rede -->
+    <div id="step6" class="step">
+        <h3>Passo 4: Isolar o Problema</h3>
+        
+        <div class="instruction-box">
+            Precisamos descobrir se o bloqueio está no seu aparelho ou na sua internet.
+            <br><br>
+            Você informou que está usando <strong><span id="txt-disp"></span></strong> pelo <strong><span id="txt-rede"></span></strong>.
+            <br><br>
+            Por favor, tente acessar a plataforma usando <strong><span id="txt-novo-disp"></span></strong> e, se possível, mude a internet para <strong><span id="txt-nova-rede"></span></strong>.
+        </div>
+        
+        <p style="text-align: center; font-weight: bold;">Acessando de outro modo, solucionou?</p>
+        <div class="action-buttons">
+            <button class="btn btn-success" onclick="mostrarSucesso()">✅ Sim, resolveu!</button>
+            <button class="btn btn-danger" onclick="nextStep(6)">❌ Não, o erro continua</button>
+        </div>
+    </div>
+
+    <!-- ETAPA 7: Falar com Suporte -->
+    <div id="step7" class="step">
+        <h3>Falar com a Equipe</h3>
+        
+        <div class="instruction-box">
+            Como você já realizou todas as etapas de triagem e o problema persiste, isso indica que pode ser um erro específico na sua conta ou no sistema.
+            <br><br>
+            Nossa equipe técnica já está pronta para investigar o seu caso internamente.
+        </div>
+        
+        <p style="text-align: center;">Clique no botão abaixo para ser direcionado ao nosso WhatsApp. Em breve iremos te atender!</p>
+        
+        <button class="btn btn-whatsapp" onclick="chamarWhatsApp()">
+            📱 Chamar Suporte no WhatsApp
+        </button>
     </div>
 
 </div>
 
 <script>
-    // Objeto para armazenar as informações digitadas pelo cliente
     let dadosCliente = {
         nome: '',
         email: '',
         problema: '',
-        dispositivo: ''
+        dispositivo: '',
+        rede: ''
     };
 
-    // Controle de exibição do botão da etapa 3
-    document.getElementById('usa-chrome').addEventListener('change', function() {
-        const btn = document.getElementById('btn-step3');
-        if (this.checked) {
-            btn.style.display = 'block';
-        } else {
-            btn.style.display = 'none';
-        }
-    });
-
     function nextStep(currentStep) {
-        // Validação básica e salvamento dos dados
         if (currentStep === 1) {
             const nome = document.getElementById('nome').value;
             const email = document.getElementById('email').value;
@@ -273,24 +359,47 @@
         } 
         else if (currentStep === 2) {
             const problema = document.getElementById('problema').value;
-            const dispositivo = document.querySelector('input[name="dispositivo"]:checked').value;
             if (!problema) {
                 alert("Por favor, descreva o problema.");
                 return;
             }
             dadosCliente.problema = problema;
-            dadosCliente.dispositivo = dispositivo;
-            console.log("Informações salvas temporariamente:", dadosCliente);
+            dadosCliente.dispositivo = document.querySelector('input[name="dispositivo"]:checked').value;
+            dadosCliente.rede = document.querySelector('input[name="rede"]:checked').value;
+            
+            // Prepara os textos dinâmicos para a Etapa 6
+            document.getElementById('txt-disp').innerText = dadosCliente.dispositivo;
+            document.getElementById('txt-rede').innerText = dadosCliente.rede;
+            
+            // Lógica de sugestão de troca
+            let novoDisp = dadosCliente.dispositivo === 'Computador' ? 'um Celular ou Tablet' : 'um Computador';
+            let novaRede = dadosCliente.rede === 'Wi-Fi' ? 'os Dados Móveis (4G/5G)' : 'uma rede Wi-Fi';
+            
+            document.getElementById('txt-novo-disp').innerText = novoDisp;
+            document.getElementById('txt-nova-rede').innerText = novaRede;
         }
 
-        // Transição de tela
+        // Esconde a atual e mostra a próxima
         document.getElementById('step' + currentStep).classList.remove('active');
         document.getElementById('step' + (currentStep + 1)).classList.add('active');
     }
 
-    function finalizar() {
-        alert("Obrigado, " + dadosCliente.nome + "! Tente acessar pela guia anônima. Se o problema persistir, entre em contato com nossa equipe enviando um print da tela.");
-        // Aqui você pode adicionar no futuro um código para enviar os dados para o Google Sheets ou WhatsApp
+    function mostrarSucesso() {
+        // Esconde todas as etapas e mostra a tela de sucesso
+        const steps = document.querySelectorAll('.step');
+        steps.forEach(step => step.classList.remove('active'));
+        document.getElementById('success-screen').classList.add('active');
+    }
+
+    function chamarWhatsApp() {
+        // Formata a mensagem que chegará no WhatsApp
+        let mensagem = `Olá, vim da página de triagem.%0A%0A*Nome:* ${dadosCliente.nome}%0A*Email:* ${dadosCliente.email}%0A*Dispositivo:* ${dadosCliente.dispositivo} (${dadosCliente.rede})%0A*Problema:* ${dadosCliente.problema}%0A%0AJá realizei todos os testes (Chrome, Guia Anônima, Data/Hora e Troca de Aparelho) e o erro persiste.`;
+        
+        // SUBSTITUA O NÚMERO ABAIXO PELO WHATSAPP DE VOCÊS (Apenas números, com código do país 55)
+        let numeroWhatsApp = "5511999999999"; 
+        
+        let link = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
+        window.open(link, '_blank');
     }
 </script>
 
