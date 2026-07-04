@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte Técnico - Pense Revalida</title>
+    <style>
+        :root {
+            --primary-color: #0056b3;
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --box-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--box-bg);
+            max-width: 600px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #004494;
+        }
+
+        .instruction-box {
+            background-color: #e9f5ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .checkbox-group {
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .tutorial-steps {
+            background-color: #fff8e1;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ffe082;
+            margin-bottom: 20px;
+        }
+        
+        .tutorial-steps ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Suporte Técnico - Pense Revalida</h2>
+
+    <!-- ETAPA 1: Identificação -->
+    <div id="step1" class="step active">
+        <h3>Etapa 1: Identificação</h3>
+        <p>Para começarmos, por favor informe seus dados de acesso à plataforma.</p>
+        
+        <div class="form-group">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">E-mail de acesso à plataforma:</label>
+            <input type="email" id="email" placeholder="exemplo@email.com" required>
+        </div>
+        
+        <button class="btn" onclick="nextStep(1)">Avançar para Etapa 2</button>
+    </div>
+
+    <!-- ETAPA 2: Relato do Problema -->
+    <div id="step2" class="step">
+        <h3>Etapa 2: Detalhes do Problema</h3>
+        
+        <div class="form-group">
+            <label for="problema">Descreva aqui qual problema você está enfrentando na plataforma:</label>
+            <textarea id="problema" placeholder="Detalhe o erro, o que aparece na tela, etc." required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Qual dispositivo você está utilizando no momento?</label>
+            <div class="radio-group">
+                <label><input type="radio" name="dispositivo" value="Computador" checked> 💻 Computador</label>
+                <label><input type="radio" name="dispositivo" value="Celular"> 📱 Celular</label>
+                <label><input type="radio" name="dispositivo" value="Tablet"> 💊 Tablet</label>
+            </div>
+        </div>
+        
+        <button class="btn" onclick="nextStep(2)">Salvar e Ir para Soluções</button>
+    </div>
+
+    <!-- ETAPA 3: Orientação Inicial (Chrome) -->
+    <div id="step3" class="step">
+        <h3>Etapa 3: Primeira Tentativa de Solução</h3>
+        
+        <div class="instruction-box">
+            <strong>Instrução:</strong> A plataforma Pense Revalida é otimizada para funcionar melhor no navegador <strong>Google Chrome</strong>.
+            <br><br>
+            Se você estiver usando outro navegador (como Safari, Edge ou Firefox), pedimos que baixe o Google Chrome e tente realizar o login através dele.
+        </div>
+
+        <div class="checkbox-group">
+            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                <input type="checkbox" id="usa-chrome" style="width: 20px; height: 20px;">
+                <strong>Já estou testando no Google Chrome e o problema persiste.</strong>
+            </label>
+        </div>
+        
+        <button class="btn" id="btn-step3" onclick="nextStep(3)" style="display: none;">Ir para próxima etapa</button>
+    </div>
+
+    <!-- ETAPA 4: Guia Anônima -->
+    <div id="step4" class="step">
+        <h3>Etapa 4: Teste em Guia Anônima</h3>
+        <p>Como você já está no Google Chrome, precisamos isolar o problema. Muitas vezes, dados salvos no navegador (cache) bloqueiam o acesso correto.</p>
+        
+        <div class="instruction-box">
+            Por favor, abra uma <strong>Guia Anônima</strong> no Google Chrome e tente acessar a plataforma novamente.
+        </div>
+
+        <div class="tutorial-steps">
+            <strong>Como abrir uma Guia Anônima:</strong>
+            <br><br>
+            <strong>No Computador:</strong>
+            <ul>
+                <li>Abra o Google Chrome.</li>
+                <li>No canto superior direito, clique nos três pontinhos (Mais).</li>
+                <li>Selecione <strong>Nova janela anônima</strong>.</li>
+                <li><em>Atalho:</em> Pressione as teclas <strong>Ctrl + Shift + N</strong> (Windows) ou <strong>Cmd + Shift + N</strong> (Mac).</li>
+            </ul>
+            <br>
+            <strong>No Celular ou Tablet:</strong>
+            <ul>
+                <li>Abra o aplicativo do Google Chrome.</li>
+                <li>Toque nos três pontinhos (Mais) no canto superior (ou inferior) direito.</li>
+                <li>Toque em <strong>Nova guia anônima</strong>.</li>
+            </ul>
+        </div>
+        
+        <button class="btn" onclick="finalizar()">Concluir e Enviar Relatório</button>
+    </div>
+
+</div>
+
+<script>
+    // Objeto para armazenar as informações digitadas pelo cliente
+    let dadosCliente = {
+        nome: '',
+        email: '',
+        problema: '',
+        dispositivo: ''
+    };
+
+    // Controle de exibição do botão da etapa 3
+    document.getElementById('usa-chrome').addEventListener('change', function() {
+        const btn = document.getElementById('btn-step3');
+        if (this.checked) {
+            btn.style.display = 'block';
+        } else {
+            btn.style.display = 'none';
+        }
+    });
+
+    function nextStep(currentStep) {
+        // Validação básica e salvamento dos dados
+        if (currentStep === 1) {
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            if (!nome || !email) {
+                alert("Por favor, preencha nome e e-mail antes de continuar.");
+                return;
+            }
+            dadosCliente.nome = nome;
+            dadosCliente.email = email;
+        } 
+        else if (currentStep === 2) {
+            const problema = document.getElementById('problema').value;
+            const dispositivo = document.querySelector('input[name="dispositivo"]:checked').value;
+            if (!problema) {
+                alert("Por favor, descreva o problema.");
+                return;
+            }
+            dadosCliente.problema = problema;
+            dadosCliente.dispositivo = dispositivo;
+            console.log("Informações salvas temporariamente:", dadosCliente);
+        }
+
+        // Transição de tela
+        document.getElementById('step' + currentStep).classList.remove('active');
+        document.getElementById('step' + (currentStep + 1)).classList.add('active');
+    }
+
+    function finalizar() {
+        alert("Obrigado, " + dadosCliente.nome + "! Tente acessar pela guia anônima. Se o problema persistir, entre em contato com nossa equipe enviando um print da tela.");
+        // Aqui você pode adicionar no futuro um código para enviar os dados para o Google Sheets ou WhatsApp
+    }
+</script>
+
+</body>
+</html>
